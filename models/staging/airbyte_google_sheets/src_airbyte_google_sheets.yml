@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: airbyte_google_sheets
+    database: api-project-317780763450
+    schema: airbyte_google_sheets
+    tables:
+      - name: Exchange_Rate
+        loaded_at_field: _airbyte_emitted_at
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
