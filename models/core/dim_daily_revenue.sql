@@ -1,3 +1,13 @@
+{{
+  config(
+    materialized = "table",
+    partition_by={
+      "field": "date",
+      "data_type": "DATE",
+      "granularity": "day"
+      }
+  )
+}}
 with google_play as  (
     select * from {{ ref('fct_google_play_orders') }}
 )

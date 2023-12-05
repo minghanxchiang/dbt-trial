@@ -1,3 +1,8 @@
+{{
+  config(
+    materialized = "ephemeral"
+  )
+}}
 select
     order_number,
     order_charged_date as date,
@@ -27,3 +32,4 @@ select
     _PARTITIONTIME as pt
 
 from {{ source('GooglePlay', 'p_Sales_ts') }}
+where _PARTITIONTIME >= "2023-01-01"

@@ -1,18 +1,26 @@
+{{
+  config(
+    materialized = "ephemeral"
+  )
+}}
 with orders as  (
-    select * from {{ ref('stg_GooglePlay_p_Sales_ts') }}
+    select 
+        date,
+        "ANDROID" as platform,
+        price,
+        sku,
+        1 as orders,
+        pt,
+        currency
+    from {{ ref('stg_GooglePlay_p_Sales_ts') }}
 ), 
 exchange_rate as  (
     select * from {{ ref('stg_airbyte_google_sheets__Exchange_Rate') }}
 )
 
 select
-    date,
-    "ANDROID" as platform,
-    exchange_rate.exchange_rate,
-    price,
-    sku,
-    1 as orders,
-    orders.pt as pt
+    orders.* EXCEPT(currency),
+    exchange_rate.exchange_rate
 from orders
 left join exchange_rate using (currency)
 {% if is_incremental() %}
