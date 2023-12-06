@@ -11,13 +11,12 @@
 with orders as  (
     select 
         date,
-        "ANDROID" as platform,
+        "IOS" as platform,
         price,
         sku,
         1 as orders,
-        pt,
         currency
-    from {{ ref('stg_GooglePlay_p_Sales_ts') }}
+    from {{ ref('stg_airbyte_app_store__sales_report') }}
 ), 
 exchange_rate as  (
     select * from {{ ref('stg_airbyte_google_sheets__Exchange_Rate') }}
@@ -32,6 +31,6 @@ left join exchange_rate using (currency)
 
   -- this filter will only be applied on an incremental run
   -- (uses > to include records whose timestamp occurred since the last run of this model)
-  where pt > (select max(pt) from {{ this }})
+  where date > (select max(date) from {{ this }})
 
 {% endif %}

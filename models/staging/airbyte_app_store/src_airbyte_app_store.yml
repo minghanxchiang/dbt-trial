@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: airbyte_app_store
+    database: api-project-317780763450
+    schema: airbyte_app_store
+    tables:
+      - name: sales_report
+        loaded_at_field: _time_extracted
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
