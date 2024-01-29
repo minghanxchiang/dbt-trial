@@ -1,12 +1,11 @@
 {{
   config(
-    materialized = "materialized_view",
+    materialized = "view",
     partition_by={
       "field": "date",
       "data_type": "DATE",
       "granularity": "day"
-      },
-    allow_non_incremental_definition = true
+      }
   )
 }}
 with google_play as  (

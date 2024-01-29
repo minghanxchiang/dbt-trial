@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: DataTeam_Index
+    database: api-project-317780763450
+    schema: DataTeam_Index
+    tables:
+      - name: hardware_camera_active_user_list
