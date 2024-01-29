@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: airbyte_shopify_global
+    database: api-project-317780763450
+    schema: airbyte_shopify_global
+    tables:
+      - name: orders
+        loaded_at_field: updated_at
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}

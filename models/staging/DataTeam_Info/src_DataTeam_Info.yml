@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: DataTeam_Info
+    database: api-project-317780763450
+    schema: DataTeam_Info
+    tables:
+      - name: ReceiptMerged
+        loaded_at_field: DateCreate
+        freshness:
+          warn_after: {count: 24, period: hour}
+          error_after: {count: 48, period: hour}
